@@ -1,18 +1,8 @@
-import type { NextPage } from 'next'
-import {
-  Container,
-} from '@chakra-ui/react'
-
-import { MainLayout } from '@/components/Layout'
-
+import type { NextPage } from 'next';
+import { MainLayout } from '@/components/Layout';
 
 const Home: NextPage = () => {
+  return <MainLayout>uldslfsdf</MainLayout>;
+};
 
-  return (
-    <MainLayout >
-      uldslfsdf
-    </MainLayout>
-  )
-}
-
-export default Home
+export default Home;

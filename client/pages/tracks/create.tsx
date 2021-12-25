@@ -1,5 +1,5 @@
-import { MainLayout } from "@/components/Layout";
+import { MainLayout } from '@/components/Layout';
 
 export default function CreateTrackPage() {
-    return <MainLayout />
+  return <MainLayout />;
 }

@@ -1,50 +1,63 @@
-import { FC } from "react"
-import { ITrack } from "types/track"
-import {
-    Flex,
-    Box,
-    Image,
-    useColorModeValue,
-} from '@chakra-ui/react';
+import { FC } from "react";
+import Image from "next/image";
+import { ITrack } from "types/track";
+import { Box, Text, IconButton, Grid, Flex } from "@chakra-ui/react";
+import { FaPlay } from "react-icons/fa";
+import { FaPause } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 export const TrackItem: FC<TracProps> = ({ track, active = false }) => {
+    const router = useRouter();
+
     return (
-        <Flex p={50} w="100%" alignItems="center" justifyContent="space-around" direction={'row'}>
-            <Box
-                bg={useColorModeValue('white', 'gray.800')}
-                maxW="14"
-                borderWidth="1px"
-                rounded="sm"
-                shadow="lg"
-                position="relative">
-                <Image
-                    src={track.pictre}
-                    alt={`Picture of ${track.name}`}
-                    roundedTop="lg"
+        <Grid
+            onClick={() => router.push(`/tracks/${track._id}`)}
+            p={2}
+            templateColumns="1fr 1fr 2fr 8fr"
+            mt={6}
+            gap={2}
+            borderRadius={26}
+            boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+            sx={{
+                ":hover": {
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                },
+            }}
+        >
+            <Box w="100%" h="10">
+                <IconButton
+                    borderRadius="50%"
+                    aria-label=""
+                    icon={active ? <FaPause /> : <FaPlay />}
+                    onClick={(e) => e.stopPropagation()}
                 />
             </Box>
-            <Box p="6">
-                <Flex mt="1" justifyContent="space-between" alignContent="center">
-                    <Box
-                        fontSize="2xl"
-                        fontWeight="semibold"
-                        as="h4"
-                        lineHeight="tight"
-                        isTruncated>
-                        {track.name}
-                    </Box>
-                </Flex>
-
+            <Box maxW={50} h="10">
+                <Image alt="" width={40} height={40} src={track.pictre} />
             </Box>
-        </Flex>
+            <Box w="100%" h="10">
+                <Text>{track.name}</Text>
+                <Text>{track.artist}</Text>
+            </Box>
+            <Flex w="100%" h="10" justifyContent="end">
+                <Box sx={{ alignSelf: "center" }} mr="8">
+                    02:32 / 3:12
+                </Box>
+                <Box>
+                    <IconButton
+                        aria-label=""
+                        icon={<FaTrash />}
+                        borderRadius="50%"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </Box>
+            </Flex>
+        </Grid>
     );
-}
-
-
-
+};
 
 type TracProps = {
-    track: ITrack,
-    active?: boolean
-
-}
+    track: ITrack;
+    active?: boolean;
+};
