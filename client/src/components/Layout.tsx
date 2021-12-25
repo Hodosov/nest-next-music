@@ -1,13 +1,15 @@
-import { useDisclosure } from "@chakra-ui/react"
-import { Children, FC } from "react"
-import { NavBar } from "./NavBar"
+import { FC } from "react"
+import { NavBar } from "@/components/NavBar"
+import { Container } from "@chakra-ui/react"
 
 export const MainLayout: FC = ({ children }) => {
 
     return (
         <>
             <NavBar />
-            {children}
+            <Container h='100vh' mt={16} maxW='container.md' pt={1}>
+                {children}
+            </Container>
         </>
     )
 }
