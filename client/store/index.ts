@@ -4,6 +4,6 @@ import { reducer, RootState } from './reducers';
 
 const makeStore = (context: Context) => createStore(reducer);
 
-export const wrapper = createWrapper<Store<RootState>>(makeStore, {
+export const wrapper = createWrapper<RootState>(makeStore, {
   debug: true
 });
