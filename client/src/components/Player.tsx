@@ -5,11 +5,18 @@ import {
   Flex,
   Text
 } from '@chakra-ui/react';
+import { useActions } from 'hooks/useActions';
+import { useTypedSelector } from 'hooks/useTypedSelector';
 import { FaPause, FaPlay, FaVolumeUp } from 'react-icons/fa';
 import { TrackProgress } from './TrackProgress';
 
 export const Player = () => {
-  const active = false;
+  const { pause } = useTypedSelector((state) => state.player);
+  const { pauseTrack, playTrack } = useActions();
+
+  const play = () => {
+    pause ? playTrack() : pauseTrack();
+  };
 
   return (
     <Flex
@@ -25,8 +32,8 @@ export const Player = () => {
       <IconButton
         borderRadius="50%"
         aria-label=""
-        icon={active ? <FaPause /> : <FaPlay />}
-        onClick={(e) => e.stopPropagation()}
+        icon={!pause ? <FaPause /> : <FaPlay />}
+        onClick={play}
       />
       <Box ml="8">
         <Text>Artist</Text>
